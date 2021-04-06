@@ -3,6 +3,7 @@ import math
 from AbstractClass import AbstractLondonRailwayMapper
 from implementation.Edge import Edge
 from implementation.Graph import Graph
+from implementation.BFS import BFS
 
 class StationInfo:
 
@@ -68,16 +69,18 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
         numStops = -1
         # ADD YOUR CODE HERE
 
-        
+        result = BFS(self.graph, fromS)
+        numStops = result.lengthTo(toS)
+        print(result.pathTo(toS))
+
         return numStops    
+        
     
     
     
     def minDistance(self, fromS, toS):
         minDistance = -1.0
         # ADD YOUR CODE HERE
-
-        
         return minDistance
     
     
@@ -92,3 +95,13 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
 
 test = LondonRailwayMapper()
+
+print(test.minStops(0, 1))
+
+print(test.stationNames[0])
+print(test.stationNames[614])
+print(test.stationNames[94])
+print(test.stationNames[467])
+print(test.stationNames[150])
+print(test.stationNames[649])
+print(test.stationNames[1])

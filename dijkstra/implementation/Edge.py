@@ -4,12 +4,6 @@ class Edge:
         self.w = w
         self.weight = weight
 
-    # def fromVertex(self):
-    #     return self.v
-    
-    # def toVertex(self):
-    #     return self.w
-
     def endPoint(self):
         return self.v
 
