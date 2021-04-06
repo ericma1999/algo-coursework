@@ -17,6 +17,7 @@ class StationInfo:
 class LondonRailwayMapper(AbstractLondonRailwayMapper):
     
     stations = {}
+    # auxiliary array to reverse map index to name of station
     stationNames = []
 
     def __init__(self):
@@ -24,10 +25,7 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
         self.loadStationsAndLines()
             
      
-    
-        
-    def loadStationsAndLines(self):
-        # ADD YOUR CODE HERE
+    def __loadStations(self):
         with open('londonstations.csv') as file:
             reader = csv.reader(file, delimiter='\n')
             first = True
@@ -43,7 +41,7 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
             self.graph = Graph(id_counter + 1)
 
-
+    def __loadLines(self):
         with open('londonrailwaylines.csv') as file:
             reader = csv.reader(file, delimiter='\n')
             first = True
@@ -58,7 +56,11 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
                 self.graph.addEdge(Edge(fromStation.station_id, toStation.station_id, math.dist([fromStation.lat, fromStation.lng], [toStation.lat, toStation.lng])))
     
-        pass
+    
+    def loadStationsAndLines(self):
+        # ADD YOUR CODE HERE
+        self.__loadStations()
+        self.__loadLines()
     
     
 
