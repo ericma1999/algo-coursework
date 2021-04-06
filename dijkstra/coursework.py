@@ -68,12 +68,11 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
     def minStops(self, fromS, toS):     
         numStops = -1
         # ADD YOUR CODE HERE
+        result = BFS(self.graph, self.stations[fromS].station_id)
+        numStops = result.lengthTo(self.stations[toS].station_id)
+        print(result.pathTo(self.stations[toS].station_id))
 
-        result = BFS(self.graph, fromS)
-        numStops = result.lengthTo(toS)
-        print(result.pathTo(toS))
-
-        return numStops    
+        return numStops
         
     
     
@@ -96,7 +95,7 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
 test = LondonRailwayMapper()
 
-print(test.minStops(0, 1))
+print(test.minStops("Abbey Road", "Abbey Wood"))
 
 print(test.stationNames[0])
 print(test.stationNames[614])
