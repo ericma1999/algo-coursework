@@ -108,12 +108,12 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
 test = LondonRailwayMapper()
 
-# print(test.minStops("Abbey Road", "Abbey Wood"))
-# print(test.minStops("Baker Street", "North Wembley")) # should be 6
+print(test.minStops("Abbey Road", "Abbey Wood"))
+print(test.minStops("Baker Street", "North Wembley")) # should be 6
 
 print(test.minDistance("Baker Street", "North Wembley"))
 
-# print(test.minDistance("Abbey Road", "Abbey Wood"))
+print(test.minDistance("Abbey Road", "Abbey Wood"))
 
 # print(test.stationNames[0])
 # print(test.stationNames[614])
