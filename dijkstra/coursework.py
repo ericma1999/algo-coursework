@@ -4,7 +4,7 @@ from implementation.Edge import Edge
 from implementation.Graph import Graph
 from implementation.BFS import BFS
 from implementation.Dijkstra import DijkstraSP
-from implementation.MyHarvenstein import harvensineDistance
+from implementation.Harvenstein import harvensineDistance
 
 class StationInfo:
 
