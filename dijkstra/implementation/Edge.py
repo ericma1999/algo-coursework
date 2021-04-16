@@ -17,6 +17,9 @@ class Edge:
 
     def getWeight(self):
         return self.weight
+
+    def swap(self):
+        return Edge(self.w, self.v, self.weight)
     
     def __str__(self):
         return f"v: {self.v}, w: {self.w}, weight: {self.weight}"

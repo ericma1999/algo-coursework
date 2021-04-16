@@ -43,6 +43,8 @@ class MinPQ():
             if queueItem.vertex == vertex:
                 queueItem.weight = distanceTo
                 self.queue.sort(reverse = True)
+
+
 class DijkstraSP:
 
     def __init__(self, G, s):
@@ -64,7 +66,6 @@ class DijkstraSP:
     def __relax(self, e):
         v = e.endPoint()
         w = e.otherEndPoint(v)
-
         if self.distTo[w] > self.distTo[v] + e.getWeight() or self.distTo[w] == -1:
             self.distTo[w] = self.distTo[v] + e.getWeight()
             self.edgeTo[w] = e
@@ -90,20 +91,4 @@ class DijkstraSP:
         return path
 
     def lengthTo(self, v):
-       return self.distTo[v] 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+       return self.distTo[v]

@@ -3,6 +3,7 @@ from AbstractClass import AbstractLondonRailwayMapper
 from implementation.Edge import Edge
 from implementation.Graph import Graph
 from implementation.BFS import BFS
+from implementation.Dijkstra import DijkstraSP
 from implementation.MyHarvenstein import harvensineDistance
 
 class StationInfo:
@@ -89,6 +90,9 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
     def minDistance(self, fromS, toS):
         minDistance = -1.0
         # ADD YOUR CODE HERE
+        result = DijkstraSP(self.graph, self.stations[fromS].station_id)
+        minDistance = result.lengthTo(self.stations[toS].station_id)
+
         return minDistance
     
     
@@ -104,8 +108,12 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
 test = LondonRailwayMapper()
 
-print(test.minStops("Abbey Road", "Abbey Wood"))
+# print(test.minStops("Abbey Road", "Abbey Wood"))
 # print(test.minStops("Baker Street", "North Wembley")) # should be 6
+
+print(test.minDistance("Baker Street", "North Wembley"))
+
+# print(test.minDistance("Abbey Road", "Abbey Wood"))
 
 # print(test.stationNames[0])
 # print(test.stationNames[614])
