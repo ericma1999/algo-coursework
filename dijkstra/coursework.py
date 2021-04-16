@@ -1,9 +1,9 @@
 import csv
-import math
 from AbstractClass import AbstractLondonRailwayMapper
 from implementation.Edge import Edge
 from implementation.Graph import Graph
 from implementation.BFS import BFS
+from implementation.MyHarvenstein import harvensineDistance
 
 class StationInfo:
 
@@ -55,7 +55,7 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
                 fromStation = self.stations[rowContent[1]]
                 toStation = self.stations[rowContent[2]]
 
-                self.graph.addEdge(Edge(fromStation.station_id, toStation.station_id, math.dist([fromStation.lat, fromStation.lng], [toStation.lat, toStation.lng])))
+                self.graph.addEdge(Edge(fromStation.station_id, toStation.station_id, harvensineDistance(fromStation.lat,fromStation.lng, toStation.lat, toStation.lng)))
     
     
     def loadStationsAndLines(self):
@@ -104,8 +104,8 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
 test = LondonRailwayMapper()
 
-# print(test.minStops("Abbey Road", "Abbey Wood"))
-print(test.minStops("Baker Street", "North Wembley")) # should be 6
+print(test.minStops("Abbey Road", "Abbey Wood"))
+# print(test.minStops("Baker Street", "North Wembley")) # should be 6
 
 # print(test.stationNames[0])
 # print(test.stationNames[614])
