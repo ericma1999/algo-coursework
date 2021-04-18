@@ -1,7 +1,7 @@
-from Graph import Graph
-from Edge import Edge
-from MinHeapPQ import PQ, PQItem
-from UnionFind import UnionFind
+# from Graph import Graph
+# from Edge import Edge
+from .MinHeapPQ import PQ, PQItem
+from .UnionFind import UnionFind
 
 
 class NearestNeighbor:
@@ -16,7 +16,7 @@ class NearestNeighbor:
 
     def __nearestNeighbor(self, v, G):
         vertexAmount = 0
-        path = [v]
+        path = [G.getStationName(v)]
         score = 0
 
         currentVertex = v
@@ -32,7 +32,9 @@ class NearestNeighbor:
                 else:
                     break
             print(nextEdge)
-            path.append(nextEdge.otherEndPoint(nextEdge.endPoint()))
+            print(G.getStationName(nextEdge.otherEndPoint(nextEdge.endPoint())))
+            print(nextEdge.otherEndPoint(nextEdge.endPoint()))
+            path.append(G.getStationName(nextEdge.otherEndPoint(nextEdge.endPoint())))
 
             self.uf.union(currentVertex, nextEdge.otherEndPoint(nextEdge.endPoint()))
             currentVertex = nextEdge.otherEndPoint(nextEdge.endPoint())
@@ -58,16 +60,16 @@ class NearestNeighbor:
         return self.bestScore
 
 
-testGraph = Graph(4)
-testGraph.addEdge(Edge(0, 1, 9))
-testGraph.addEdge(Edge(0, 2, 18))
-testGraph.addEdge(Edge(0, 3, 5))
+# testGraph = Graph(4)
+# testGraph.addEdge(Edge(0, 1, 9))
+# testGraph.addEdge(Edge(0, 2, 18))
+# testGraph.addEdge(Edge(0, 3, 5))
 
-testGraph.addEdge(Edge(1, 2, 1))
-testGraph.addEdge(Edge(1, 3, 7))
+# testGraph.addEdge(Edge(1, 2, 1))
+# testGraph.addEdge(Edge(1, 3, 7))
 
-testGraph.addEdge(Edge(2, 3, 3))
+# testGraph.addEdge(Edge(2, 3, 3))
 
-test = NearestNeighbor(testGraph)
-print(test.getScore())
-print(test.getPaths())
+# test = NearestNeighbor(testGraph)
+# print(test.getScore())
+# print(test.getPaths())

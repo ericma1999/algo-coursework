@@ -5,13 +5,18 @@ from implementation.Graph import Graph, TSPGraph
 from implementation.BFS import BFS
 from implementation.Dijkstra import DijkstraSP
 from implementation.Harvenstein import harvensineDistance,euclidean_distance
+from implementation.NearestNeighbor import NearestNeighbor
 
 class StationInfo:
 
-    def __init__(self, station_id, lat, lng):
+    def __init__(self, station_id, name, lat, lng):
         self.station_id = station_id
+        self.name = name
         self.lat = float(lat)
         self.lng = float(lng)
+    
+    def getName(self):
+        return self.name
 
     def __str__(self):
         return f"station_id: {self.station_id}, latitude: {self.lat}, longitude: {self.lng}"
@@ -37,7 +42,7 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
                     first = False
                     continue
                 rowContent = row[0].split(',')
-                self.stations[rowContent[0]] = StationInfo(id_counter, rowContent[1], rowContent[2])
+                self.stations[rowContent[0]] = StationInfo(id_counter, rowContent[0], rowContent[1], rowContent[2])
                 self.stationNames.append(rowContent[0])
                 id_counter+=1
 
@@ -100,14 +105,16 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
             stations.append(self.stations[stationName])
 
         newGraph = TSPGraph(len(inputList), stations)
+        result = NearestNeighbor(newGraph)
+        print(result.getPaths())
+        print(result.getScore())
 
-        
-        return outputList
+        return result.getPaths()
 
 
 test = LondonRailwayMapper()
 
-test.newRailwayLine(["Queens Park", "Chigwell"])
+test.newRailwayLine(["Queens Park", "Chigwell", "Moorgate", "Swiss Cottage", "Liverpool Street", "Highgate"])
 
 # print(test.minStops("Abbey Road", "Abbey Wood"))
 # print(test.minStops("Baker Street", "North Wembley")) # should be 6
