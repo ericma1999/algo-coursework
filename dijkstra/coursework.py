@@ -6,6 +6,7 @@ from implementation.BFS import BFS
 from implementation.Dijkstra import DijkstraSP
 from implementation.Harvenstein import harvensineDistance,euclidean_distance
 from implementation.NearestNeighbor import NearestNeighbor
+from implementation.TwoApprox import TwoApprox
 
 class StationInfo:
 
@@ -96,6 +97,18 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
         minDistance = result.lengthTo(self.stations[toS].station_id)
 
         return minDistance
+
+    def __useNearestNeighbor(self, graph):
+        result = NearestNeighbor(graph)
+        print(result.getPaths())
+        print(result.getScore())
+
+        return result.getPaths() 
+
+    def __useTwoApprox(self, graph):
+        result = TwoApprox(graph)
+        print(result.getPath())
+        return result.getPath()
     
     def newRailwayLine(self, inputList):
         outputList = []
@@ -105,11 +118,8 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
             stations.append(self.stations[stationName])
 
         newGraph = TSPGraph(len(inputList), stations)
-        result = NearestNeighbor(newGraph)
-        print(result.getPaths())
-        print(result.getScore())
 
-        return result.getPaths()
+        return self.__useNearestNeighbor(newGraph)
 
 
 test = LondonRailwayMapper()

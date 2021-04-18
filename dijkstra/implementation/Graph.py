@@ -30,6 +30,9 @@ class TSPGraph(Graph):
 
     def getStationName(self, index):
         return self.stations[index].getName()
+    
+    def getStations(self):
+        return self.stations.copy()
 
     def __createCompleteGraph(self, inputStations):
         for index, currentStation in enumerate(inputStations):
