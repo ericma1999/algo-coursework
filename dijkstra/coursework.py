@@ -1,7 +1,7 @@
 import csv
 from AbstractClass import AbstractLondonRailwayMapper
 from implementation.Edge import Edge
-from implementation.Graph import Graph
+from implementation.Graph import Graph, TSPGraph
 from implementation.BFS import BFS
 from implementation.Dijkstra import DijkstraSP
 from implementation.Harvenstein import harvensineDistance,euclidean_distance
@@ -58,14 +58,11 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
                 self.graph.addEdge(Edge(fromStation.station_id, toStation.station_id, harvensineDistance(fromStation.lat,fromStation.lng, toStation.lat, toStation.lng)))
     
-    
     def loadStationsAndLines(self):
         # ADD YOUR CODE HERE
         self.__loadStations()
         self.__loadLines()
     
-    
-
     def minStops(self, fromS, toS):     
         numStops = -1
         # ADD YOUR CODE HERE
@@ -95,12 +92,14 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
         return minDistance
     
-    
-    
-    
     def newRailwayLine(self, inputList):
         outputList = []
         # ADD YOUR CODE HERE
+        stations = []
+        for stationName in inputList:
+            stations.append(self.stations[stationName])
+
+        newGraph = TSPGraph(len(inputList), stations)
 
         
         return outputList
@@ -108,12 +107,14 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
 test = LondonRailwayMapper()
 
-print(test.minStops("Abbey Road", "Abbey Wood"))
-print(test.minStops("Baker Street", "North Wembley")) # should be 6
+test.newRailwayLine(["Queens Park", "Chigwell"])
 
-print(test.minDistance("Baker Street", "North Wembley"))
+# print(test.minStops("Abbey Road", "Abbey Wood"))
+# print(test.minStops("Baker Street", "North Wembley")) # should be 6
 
-print(test.minDistance("Abbey Road", "Abbey Wood"))
+# print(test.minDistance("Baker Street", "North Wembley"))
+
+# print(test.minDistance("Abbey Road", "Abbey Wood"))
 
 # print(test.stationNames[0])
 # print(test.stationNames[614])
