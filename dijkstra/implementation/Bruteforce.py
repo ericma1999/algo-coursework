@@ -30,8 +30,8 @@ class BruteForce:
 
         toVisit = edge.otherEndPoint(edge.endPoint())
         if not visited[toVisit]:
-            vertexCount += 1
-            score += edge.weight
+            # vertexCount += 1
+            # score += edge.weight
             path.append(toVisit)
             visited[toVisit] = True
-            self.__possibleEdges(self.G.adjacencies(toVisit), visited, path, score, vertexCount)
+            self.__possibleEdges(self.G.adjacencies(toVisit), visited, path, score + edge.weight, vertexCount + 1)
