@@ -7,6 +7,7 @@ from implementation.Dijkstra import DijkstraSP
 from implementation.Harvenstein import harvensineDistance,euclidean_distance
 from implementation.NearestNeighbor import NearestNeighbor
 from implementation.TwoApprox import TwoApprox
+from implementation.Bruteforce import BruteForce
 
 class StationInfo:
 
@@ -87,9 +88,6 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
             output += [self.stationNames[station_id]]
         return output
         
-    
-    
-    
     def minDistance(self, fromS, toS):
         minDistance = -1.0
         # ADD YOUR CODE HERE
@@ -109,6 +107,10 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
         result = TwoApprox(graph)
         print(result.getPath())
         return result.getPath()
+
+    def __useBruteForce(self, graph):
+        result = BruteForce(graph)
+        return result
     
     def newRailwayLine(self, inputList):
         outputList = []
@@ -119,13 +121,18 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
         newGraph = TSPGraph(len(inputList), stations)
 
-        return self.__useNearestNeighbor(newGraph)
+        # return self.__useNearestNeighbor(newGraph)
+        result = self.__useBruteForce(newGraph)
+        for id in result.best_path:
+            print(newGraph.getStationName(id))
 
 
 test = LondonRailwayMapper()
 
-test.newRailwayLine(["Queens Park", "Chigwell", "Moorgate", "Swiss Cottage", "Liverpool Street", "Highgate"])
+# test.newRailwayLine(["Queens Park", "Chigwell", "Moorgate", "Swiss Cottage", "Liverpool Street", "Highgate"])
 
+
+test.newRailwayLine(['Finchley Central' , 'Tottenham Hale' , 'Stamford Hill' , 'Whitechapel' , 'Canada Water' , 'Borough' , 'Brixton' , 'Imperial Wharf' , 'Hackney Downs' , 'Alperton'])
 # print(test.minStops("Abbey Road", "Abbey Wood"))
 # print(test.minStops("Baker Street", "North Wembley")) # should be 6
 
