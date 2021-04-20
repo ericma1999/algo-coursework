@@ -35,35 +35,33 @@ class Christofides:
 
         # get all the odd stations
         oddVerticesStation = []
-        x = []
-        y = []
-        for v in range(self.G.V):
-            if len(mstGraph.adjacencies(v)) % 2 != 0:
-                oddVerticesStation.append(self.G.getStation(v))
-                x.append(self.G.getStation(v).lat)
-                y.append(self.G.getStation(v).lng)
+        # x = []
+        # y = []
+        # for v in range(self.G.V):
+        #     if len(mstGraph.adjacencies(v)) % 2 != 0:
+        #         oddVerticesStation.append(self.G.getStation(v))
+        #         x.append(self.G.getStation(v).lat)
+        #         y.append(self.G.getStation(v).lng)
 
-        ax.plot(x,y, 'o', color='black')
+        # ax.plot(x,y, 'o', color='black')
         
         # create graph of odd vertices
         oddDegreeVertexGraph = TSPGraph(len(oddVerticesStation), oddVerticesStation)
 
         
-
-
         minWeightMaximalEdges = self.__getMinWeightMatching(oddDegreeVertexGraph)
         
-        minx = []
-        miny = []
-        for edge in minWeightMaximalEdges:
-           minx.append(oddVerticesStation[edge.v].lat)
-           miny.append(oddVerticesStation[edge.v].lng) 
-           minx.append(oddVerticesStation[edge.w].lat)
-           miny.append(oddVerticesStation[edge.w].lng)
-           ax.plot(minx, miny, ':', color='red')
-           minx = []
-           miny =[]
-        plt.show()
+        # minx = []
+        # miny = []
+        # for edge in minWeightMaximalEdges:
+        #    minx.append(oddVerticesStation[edge.v].lat)
+        #    miny.append(oddVerticesStation[edge.v].lng) 
+        #    minx.append(oddVerticesStation[edge.w].lat)
+        #    miny.append(oddVerticesStation[edge.w].lng)
+        #    ax.plot(minx, miny, ':', color='red')
+        #    minx = []
+        #    miny =[]
+        # plt.show()
 
         for edge in minWeightMaximalEdges:
 
@@ -96,6 +94,8 @@ class Christofides:
         while gotten < amount:
             nextEdge = pq.delMin()
             print(nextEdge)
+            print(G.getStationName(nextEdge.v))
+            print(G.getStationName(nextEdge.w))
             if not marked[nextEdge.endPoint()] and not marked[nextEdge.otherEndPoint(nextEdge.endPoint())]:
                marked[nextEdge.endPoint()] = True 
                marked[nextEdge.otherEndPoint(nextEdge.endPoint())] = True
