@@ -1,4 +1,7 @@
 import csv
+from matplotlib import pyplot as plt
+
+
 from AbstractClass import AbstractLondonRailwayMapper
 from implementation.Edge import Edge
 from implementation.Graph import Graph, TSPGraph
@@ -130,8 +133,20 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
             stations.append(self.stations[stationName])
 
         newGraph = TSPGraph(len(inputList), stations)
+        path, x, y = self.__useChristofides(newGraph)
+        print(path)
 
-        print(self.__useChristofides(newGraph))
+        # paths, x, y = self.__useTwoApprox(newGraph)
+        fig = plt.figure()
+        ax = fig.add_axes([0,0,1,1])
+
+        ax.plot(x,y, 'o-')
+        plt.show()
+
+
+
+
+
         # print(self.__useBruteForce2(newGraph))
 
         # return self.__useNearestNeighbor(newGraph)
@@ -142,10 +157,15 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
 test = LondonRailwayMapper()
 
-test.newRailwayLine(["Queens Park", "Chigwell", "Moorgate", "Swiss Cottage", "Liverpool Street", "Highgate"])
+# test.newRailwayLine(["Queens Park", "Chigwell", "Moorgate", "Swiss Cottage", "Liverpool Street", "Highgate"])
 
 
-# test.newRailwayLine(['Finchley Central' , 'Tottenham Hale' , 'Stamford Hill' , 'Whitechapel' , 'Canada Water' , 'Borough' , 'Brixton' , 'Imperial Wharf' , 'Hackney Downs' , 'Alperton'])
+# test.newRailwayLine(['Finchley Central' , 'Tottenham Hale' , 'Stamford Hill' , 'Whitechapel' , 'Canada Water' , 'Borough' , 'Brixton' , 'Imperial Wharf' , 'Hackney Downs' , 'Alperton', 'Kenton'])
+
+
+# test.newRailwayLine(['Abbey Road', 'Barbican', 'Bethnal Green', 'Cambridge Heath', 'Covent Garden', 'Dollis Hill', 'East Finchley', 'Finchley Road and Frognal', 'Great Portland Street', 'Hackney Wick', 'Isleworth', 'Kentish Town West'])
+
+test.newRailwayLine(['Abbey Road', 'Barbican', 'Bethnal Green', 'Cambridge Heath', 'Covent Garden', 'Dollis Hill', 'East Finchley', 'Finchley Road and Frognal', 'Great Portland Street', 'Hackney Wick'])
 # print(test.minStops("Abbey Road", "Abbey Wood"))
 # print(test.minStops("Baker Street", "North Wembley")) # should be 6
 

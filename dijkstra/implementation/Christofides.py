@@ -8,6 +8,7 @@ from .Prim import LazyPrimMST
 from .Graph import Graph, TSPGraph
 from .MinHeapPQ import PQ, PQItem
 from .DFS import DFS
+from matplotlib import pyplot as plt
 
 class Christofides:
 
@@ -19,19 +20,50 @@ class Christofides:
         # generate mst graph
         mst = LazyPrimMST(self.G)
         mstGraph = Graph(self.G.V)
+
+        fig = plt.figure()
+        ax = fig.add_axes([0,0,1,1])
         for edge in mst.mst.queue:
             mstGraph.addEdge(edge)
+
+            stationFrom = self.G.getStation(edge.v)
+            stationTo = self.G.getStation(edge.w)
+            x = [stationFrom.lat, stationTo.lat]
+            y = [stationFrom.lng, stationTo.lng]
+            ax.plot(x, y, 'bo-', color='blue')
         
 
         # get all the odd stations
         oddVerticesStation = []
+        x = []
+        y = []
         for v in range(self.G.V):
             if len(mstGraph.adjacencies(v)) % 2 != 0:
                 oddVerticesStation.append(self.G.getStation(v))
+                x.append(self.G.getStation(v).lat)
+                y.append(self.G.getStation(v).lng)
+
+        ax.plot(x,y, 'o', color='black')
         
         # create graph of odd vertices
         oddDegreeVertexGraph = TSPGraph(len(oddVerticesStation), oddVerticesStation)
+
+        
+
+
         minWeightMaximalEdges = self.__getMinWeightMatching(oddDegreeVertexGraph)
+        
+        minx = []
+        miny = []
+        for edge in minWeightMaximalEdges:
+           minx.append(oddVerticesStation[edge.v].lat)
+           miny.append(oddVerticesStation[edge.v].lng) 
+           minx.append(oddVerticesStation[edge.w].lat)
+           miny.append(oddVerticesStation[edge.w].lng)
+           ax.plot(minx, miny, ':', color='red')
+           minx = []
+           miny =[]
+        plt.show()
 
         for edge in minWeightMaximalEdges:
 
@@ -45,8 +77,8 @@ class Christofides:
 
     
     def getPath(self):
-        result = DFS(self.unionGraph,  0, self.G.getStations())
-        return result.path
+        result = DFS(self.unionGraph, 0, self.G.getStations())
+        return result.path, result.x, result.y
 
 
 
@@ -63,8 +95,8 @@ class Christofides:
         minMaximalEdges = []
         while gotten < amount:
             nextEdge = pq.delMin()
-
-            if not (marked[nextEdge.endPoint()] or marked[nextEdge.otherEndPoint(nextEdge.endPoint())]):
+            print(nextEdge)
+            if not marked[nextEdge.endPoint()] and not marked[nextEdge.otherEndPoint(nextEdge.endPoint())]:
                marked[nextEdge.endPoint()] = True 
                marked[nextEdge.otherEndPoint(nextEdge.endPoint())] = True
                gotten += 1

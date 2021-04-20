@@ -14,7 +14,7 @@ class TwoApprox:
             dfsGraph.addEdge(edge)
 
         result = DFS(dfsGraph, 0, G.getStations())
-        self.path = result.path
+        self.result = result
     
     def getPath(self):
-        return self.path
+        return self.result.path, self.result.x, self.result.y
