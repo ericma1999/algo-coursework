@@ -26,6 +26,7 @@ class TSPGraph(Graph):
     def __init__(self, V, stations):
         super().__init__(V)
         self.stations = []
+        self.stationsDict = {}
         self.__createCompleteGraph(stations)
 
     def getStationName(self, index):
@@ -37,9 +38,13 @@ class TSPGraph(Graph):
     def getStation(self, index):
         return self.stations[index]
 
+    def getStationIndexWithName(self, name):
+        return self.stationsDict[name]
+
     def __createCompleteGraph(self, inputStations):
         for index, currentStation in enumerate(inputStations):
             for createdStationIndex, createdStation in enumerate(self.stations):
                 distance = euclidean_distance(self.stations[createdStationIndex].lat, self.stations[createdStationIndex].lng, currentStation.lat, currentStation.lng)
                 self.addEdge(Edge(index, createdStationIndex, distance))
             self.stations.append(currentStation)
+            self.stationsDict[currentStation.getName()] = index

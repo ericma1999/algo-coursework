@@ -9,6 +9,7 @@ from implementation.NearestNeighbor import NearestNeighbor
 from implementation.TwoApprox import TwoApprox
 from implementation.Bruteforce import BruteForce
 from implementation.Bruteforce2 import BruteForce2
+from implementation.Christofides import Christofides
 
 class StationInfo:
 
@@ -116,6 +117,10 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
     def __useBruteForce2(self, graph):
         result = BruteForce2(graph)
         return result.bestPath
+
+    def __useChristofides(self, graph):
+        result =  Christofides(graph).getPath()
+        return result
     
     def newRailwayLine(self, inputList):
         outputList = []
@@ -126,7 +131,8 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
         newGraph = TSPGraph(len(inputList), stations)
 
-        print(self.__useBruteForce2(newGraph))
+        print(self.__useChristofides(newGraph))
+        # print(self.__useBruteForce2(newGraph))
 
         # return self.__useNearestNeighbor(newGraph)
         # result = self.__useBruteForce(newGraph)
@@ -139,7 +145,7 @@ test = LondonRailwayMapper()
 test.newRailwayLine(["Queens Park", "Chigwell", "Moorgate", "Swiss Cottage", "Liverpool Street", "Highgate"])
 
 
-test.newRailwayLine(['Finchley Central' , 'Tottenham Hale' , 'Stamford Hill' , 'Whitechapel' , 'Canada Water' , 'Borough' , 'Brixton' , 'Imperial Wharf' , 'Hackney Downs' , 'Alperton'])
+# test.newRailwayLine(['Finchley Central' , 'Tottenham Hale' , 'Stamford Hill' , 'Whitechapel' , 'Canada Water' , 'Borough' , 'Brixton' , 'Imperial Wharf' , 'Hackney Downs' , 'Alperton'])
 # print(test.minStops("Abbey Road", "Abbey Wood"))
 # print(test.minStops("Baker Street", "North Wembley")) # should be 6
 
