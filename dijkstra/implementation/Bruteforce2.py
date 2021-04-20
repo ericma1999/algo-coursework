@@ -6,6 +6,8 @@ class BruteForce2:
         self.bestScore = -1
         self.bestPath = []
         self.G = G
+        self.x = []
+        self.y = []
 
         vertices = [x for x in range(G.V)]
 
@@ -13,12 +15,16 @@ class BruteForce2:
 
     def __tryPathAndScore(self, pathRoute):
         path = []
+        x = []
+        y = []
         score = 0
 
         previous_position = None
         for index, vertex in enumerate(pathRoute):
             currentStation = self.G.getStation(vertex)
             path.append(currentStation.getName())
+            x.append(currentStation.lat)
+            y.append(currentStation.lng)
             if (index == 0):
                 previous_position = (currentStation.lat, currentStation.lng)
                 continue
@@ -30,6 +36,8 @@ class BruteForce2:
         if score < self.bestScore or self.bestScore == -1:
             self.bestPath = path
             self.bestScore = score
+            self.x = x
+            self.y = y
 
 
     def __permutations(self, size, values):
