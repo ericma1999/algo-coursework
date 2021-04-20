@@ -8,6 +8,7 @@ from implementation.Harvenstein import harvensineDistance,euclidean_distance
 from implementation.NearestNeighbor import NearestNeighbor
 from implementation.TwoApprox import TwoApprox
 from implementation.Bruteforce import BruteForce
+from implementation.Bruteforce2 import BruteForce2
 
 class StationInfo:
 
@@ -111,6 +112,10 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
     def __useBruteForce(self, graph):
         result = BruteForce(graph)
         return result
+
+    def __useBruteForce2(self, graph):
+        result = BruteForce2(graph)
+        return result.bestPath
     
     def newRailwayLine(self, inputList):
         outputList = []
@@ -121,10 +126,12 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
         newGraph = TSPGraph(len(inputList), stations)
 
+        print(self.__useBruteForce2(newGraph))
+
         # return self.__useNearestNeighbor(newGraph)
-        result = self.__useBruteForce(newGraph)
-        for id in result.best_path:
-            print(newGraph.getStationName(id))
+        # result = self.__useBruteForce(newGraph)
+        # for id in result.best_path:
+        #     print(newGraph.getStationName(id))
 
 
 test = LondonRailwayMapper()

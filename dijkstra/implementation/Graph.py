@@ -34,6 +34,9 @@ class TSPGraph(Graph):
     def getStations(self):
         return self.stations.copy()
 
+    def getStation(self, index):
+        return self.stations[index]
+
     def __createCompleteGraph(self, inputStations):
         for index, currentStation in enumerate(inputStations):
             for createdStationIndex, createdStation in enumerate(self.stations):
