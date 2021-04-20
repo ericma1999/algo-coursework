@@ -1,4 +1,5 @@
 from .Edge import Edge
+from .MinHeapPQ import PQ
 from .Euclidean import euclidean_distance
 class Graph:
 
@@ -26,7 +27,9 @@ class TSPGraph(Graph):
     def __init__(self, V, stations):
         super().__init__(V)
         self.stations = []
+        self.minEdges = PQ()
         self.stationsDict = {}
+        edges = PQ()
         self.__createCompleteGraph(stations)
 
     def getStationName(self, index):
@@ -45,6 +48,8 @@ class TSPGraph(Graph):
         for index, currentStation in enumerate(inputStations):
             for createdStationIndex, createdStation in enumerate(self.stations):
                 distance = euclidean_distance(self.stations[createdStationIndex].lat, self.stations[createdStationIndex].lng, currentStation.lat, currentStation.lng)
-                self.addEdge(Edge(index, createdStationIndex, distance))
+                edge = Edge(index, createdStationIndex, distance)
+                self.addEdge(edge)
+                self.minEdges.insert(edge)
             self.stations.append(currentStation)
             self.stationsDict[currentStation.getName()] = index
