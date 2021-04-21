@@ -28,8 +28,6 @@ class TSPGraph(Graph):
         super().__init__(V)
         self.stations = []
         self.minEdges = PQ()
-        self.stationsDict = {}
-        edges = PQ()
         self.__createCompleteGraph(stations)
 
     def getStationName(self, index):
@@ -41,9 +39,6 @@ class TSPGraph(Graph):
     def getStation(self, index):
         return self.stations[index]
 
-    def getStationIndexWithName(self, name):
-        return self.stationsDict[name]
-
     def __createCompleteGraph(self, inputStations):
         for index, currentStation in enumerate(inputStations):
             for createdStationIndex, createdStation in enumerate(self.stations):
@@ -52,4 +47,3 @@ class TSPGraph(Graph):
                 self.addEdge(edge)
                 self.minEdges.insert(edge)
             self.stations.append(currentStation)
-            self.stationsDict[currentStation.getName()] = index

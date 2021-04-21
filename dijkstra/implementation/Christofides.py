@@ -64,11 +64,6 @@ class Christofides:
         plt.show()
 
         for edge in minWeightMaximalEdges:
-
-            # oddVertexStationFrom = oddVerticesStation[edge.endPoint()].getName()
-            # oddVertexStationTo = oddVerticesStation[edge.otherEndPoint(edge.endPoint())].getName()
-            # edge.v = self.G.getStationIndexWithName(oddVertexStationFrom)
-            # edge.w = self.G.getStationIndexWithName(oddVertexStationTo)
             mstGraph.addEdge(edge)
         
         self.unionGraph = mstGraph
@@ -101,21 +96,6 @@ class Christofides:
                 marked[nextEdge.v] = True
                 marked[nextEdge.w] = True
                 gotten += 1
-
-
-
-        # gotten = 0
-        # minMaximalEdges = []
-        # while gotten < amount:
-        #     nextEdge = pq.delMin()
-        #     # print(nextEdge)
-        #     # print(G.getStationName(nextEdge.v))
-        #     # print(G.getStationName(nextEdge.w))
-        #     if not marked[nextEdge.endPoint()] and not marked[nextEdge.otherEndPoint(nextEdge.endPoint())]:
-        #        marked[nextEdge.endPoint()] = True 
-        #        marked[nextEdge.otherEndPoint(nextEdge.endPoint())] = True
-        #        gotten += 1
-        #        minMaximalEdges.append(nextEdge)
         return minMaximalEdges
 
         
