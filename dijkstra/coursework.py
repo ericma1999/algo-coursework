@@ -106,7 +106,7 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
         print(result.getPaths())
         print(result.getScore())
 
-        return result.getPaths() 
+        return result.getPaths(), result.x, result.y
 
     def __useTwoApprox(self, graph):
         result = TwoApprox(graph)
@@ -136,6 +136,12 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
         # path, x, y = self.__useChristofides(newGraph)
         path, x, y = self.__useNearestNeighbor(newGraph)
 
+        print(x)
+        print(y)
+
+        print(path)
+
+
         # paths, x, y = self.__useTwoApprox(newGraph)
         fig = plt.figure()
         ax = fig.add_axes([0,0,1,1])
@@ -159,9 +165,11 @@ test = LondonRailwayMapper()
 
 # test.newRailwayLine(['Abbey Road', 'Barbican', 'Bethnal Green', 'Cambridge Heath', 'Covent Garden', 'Dollis Hill', 'East Finchley', 'Finchley Road and Frognal', 'Great Portland Street', 'Hackney Wick', 'Isleworth', 'Kentish Town West', 'Leyton', 'Marble Arch', 'North Wembley', 'Old Street', 'Pimlico', 'Queens Park', 'Richmond', 'Shepherds Bush', 'Tottenham Hale', 'Uxbridge', 'Vauxhall', 'Wapping'])
 
+test.newRailwayLine(["Queens Park", "Chigwell", "Moorgate", "Swiss Cottage", "Liverpool Street", "Highgate"])
+
 # test.newRailwayLine(['Abbey Road', 'Barbican', 'Bethnal Green', 'Cambridge Heath', 'Covent Garden', 'Dollis Hill', 'East Finchley', 'Finchley Road and Frognal', 'Great Portland Street', 'Hackney Wick', 'Isleworth', 'Kentish Town West', 'Leyton', 'Marble Arch', 'North Wembley', 'Old Street', 'Pimlico', 'Queens Park', 'Richmond', 'Shepherds Bush', 'Tottenham Hale', 'Uxbridge', 'Vauxhall', 'Wapping'])
 
-test.newRailwayLine(['Finchley Central' , 'Tottenham Hale' , 'Stamford Hill' , 'Whitechapel' , 'Canada Water' , 'Borough' , 'Brixton' , 'Imperial Wharf' , 'Hackney Downs' , 'Alperton' , 'Kenton'])
+# test.newRailwayLine(['Finchley Central' , 'Tottenham Hale' , 'Stamford Hill' , 'Whitechapel' , 'Canada Water' , 'Borough' , 'Brixton' , 'Imperial Wharf' , 'Hackney Downs' , 'Alperton' , 'Kenton'])
 # print(test.minStops("Abbey Road", "Abbey Wood"))
 # print(test.minStops("Baker Street", "North Wembley")) # should be 6
 
