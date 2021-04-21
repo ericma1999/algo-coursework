@@ -134,7 +134,7 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
         newGraph = TSPGraph(len(inputList), stations)
         # path, x, y = self.__useChristofides(newGraph)
-        path, x, y = self.__useTwoApprox(newGraph)
+        path, x, y = self.__useBruteForce2(newGraph)
 
         print(x)
         print(y)
@@ -169,7 +169,7 @@ test = LondonRailwayMapper()
 
 # test.newRailwayLine(['Abbey Road', 'Barbican', 'Bethnal Green', 'Cambridge Heath', 'Covent Garden', 'Dollis Hill', 'East Finchley', 'Finchley Road and Frognal', 'Great Portland Street', 'Hackney Wick', 'Isleworth', 'Kentish Town West', 'Leyton', 'Marble Arch', 'North Wembley', 'Old Street', 'Pimlico', 'Queens Park', 'Richmond', 'Shepherds Bush', 'Tottenham Hale', 'Uxbridge', 'Vauxhall', 'Wapping'])
 
-test.newRailwayLine(['Finchley Central' , 'Tottenham Hale' , 'Stamford Hill' , 'Whitechapel' , 'Canada Water' , 'Borough' , 'Brixton' , 'Imperial Wharf' , 'Hackney Downs' , 'Alperton' , 'Kenton'])
+test.newRailwayLine(['Finchley Central' , 'Tottenham Hale' , 'Stamford Hill' , 'Whitechapel' , 'Canada Water' , 'Borough' , 'Brixton' , 'Imperial Wharf' , 'Hackney Downs' , 'Alperton'])
 # print(test.minStops("Abbey Road", "Abbey Wood"))
 # print(test.minStops("Baker Street", "North Wembley")) # should be 6
 
