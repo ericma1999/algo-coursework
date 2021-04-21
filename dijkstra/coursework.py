@@ -134,7 +134,7 @@ class LondonRailwayMapper(AbstractLondonRailwayMapper):
 
         newGraph = TSPGraph(len(inputList), stations)
         # path, x, y = self.__useChristofides(newGraph)
-        path, x, y = self.__useChristofides(newGraph)
+        path, x, y = self.__useTwoApprox(newGraph)
 
         print(x)
         print(y)
